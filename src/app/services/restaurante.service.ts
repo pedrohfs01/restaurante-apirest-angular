@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import { ErrorHandler } from "app/exceptions/error-handler";
+import { MenuItem } from "app/models/menu-item.model";
 
 Injectable()
 export class RestauranteService{
@@ -26,6 +27,11 @@ export class RestauranteService{
 
     reviewsOfRestaurant(id: string): Observable<any>{
         return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
+        .map(response => response.json())
+        .catch(ErrorHandler.errorHandler);
+    }
+    menuOfRestaurant(id: string): Observable<MenuItem[]>{
+        return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
         .map(response => response.json())
         .catch(ErrorHandler.errorHandler);
     }
