@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'mt-delivery-cost',
@@ -6,9 +6,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliveryCostComponent implements OnInit {
 
+  @Input() delivery: number;
+  @Input() itemsValue: number;
+
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  total(): number{
+    return this.delivery + this.itemsValue;
+  }
 }
