@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
 import { CartItem } from 'app/models/cart-item.model';
 import { Order, OrderItem } from 'app/models/order.model';
@@ -11,6 +12,8 @@ import { OrderService } from 'app/services/order.service';
 })
 export class OrderComponent implements OnInit {
 
+  orderForm: FormGroup;
+
   delivery: number = 10;
 
   paymentOptions: RadioOption[] = [
@@ -21,9 +24,32 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private router: Router) { }
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.orderForm = this.formBuilder.group({
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.email]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
+      address: this.formBuilder.control('',[Validators.required, Validators.minLength(5)]),
+      number: this.formBuilder.control('', [Validators.required]),
+      optionalAddress: this.formBuilder.control(''),
+      paymentOptional: this.formBuilder.control('', [Validators.required])
+    }, {validators: OrderComponent.equalsTo});
+  }
+
+  static equalsTo(group: AbstractControl) : {[key: string]: boolean}{
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+    if(!email || !emailConfirmation){
+      return undefined;
+    }
+
+    if(email.value !== emailConfirmation.value){
+      return {emailsNotMatch: true}
+    }
+    return undefined;
   }
 
   itemsValue(): number{

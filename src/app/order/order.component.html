@@ -4,7 +4,7 @@
 <section class="content">
   <section class="invoice">
 
-    <form #form="ngForm" novalidate>
+    <form [formGroup] = "orderForm" novalidate>
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
@@ -13,23 +13,45 @@
         </div>
       </div>
 
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Seus dados:</p>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <mt-input errorMessage="Campo obrigatório" label="Nome">
+            <input class="form-control" formControlName="name" placeholder="Nome">
+          </mt-input>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input errorMessage="Email inválido" label="Email">
+            <input type="text" class="form-control" formControlName="email" placeholder="Email">
+          </mt-input>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <mt-input errorMessage="Email inválido" label="Email">
+            <input type="text" class="form-control" formControlName="emailConfirmation" placeholder="Confirmação Email">
+          </mt-input>
+        </div>
+      </div>
+
       <div class="row invoice-info">
         <div class="col-xs-12">
           <p class="lead">Endereço de Entrega:</p>
         </div>
         <div class="col-sm-6 col-xs-12">
-           <mt-input errorMessage="Campo obrigatório com 5 caracteres" label="Endereço"> 
-              <input class="form-control" name="address" ngModel placeholder="Endereço" required minlength="5">                
-            </mt-input>
+          <mt-input errorMessage="Campo obrigatório com 5 caracteres" label="Endereço">
+            <input class="form-control" formControlName="address" placeholder="Endereço">
+          </mt-input>
         </div>
         <div class="col-sm-3 col-xs-6">
           <mt-input errorMessage="Obrigatório e somente números" label="Numero">
-            <input type="text" class="form-control" required name="number" pattern="^[0-9]*$" ngModel placeholder="Número">
+            <input type="text" class="form-control" formControlName="number" placeholder="Número">
           </mt-input>
         </div>
         <div class="col-sm-3 col-xs-6">
           <mt-input>
-            <input type="text" class="form-control" name="optionalAddress" ngModel placeholder="Complemento">
+            <input type="text" class="form-control" formControlName="optionalAddress" placeholder="Complemento">
           </mt-input>
         </div>
       </div>
@@ -39,11 +61,8 @@
         <div class="col-xs-12">
           <p class="lead">Itens do Pedido:</p>
         </div>
-        <mt-order-itens
-        [items]="cartItems()" 
-        (increaseQty)= "increaseQty($event)"
-        (decreaseQty)= "decreaseQty($event)"
-        (remove) = "remove($event)"></mt-order-itens>
+        <mt-order-itens [items]="cartItems()" (increaseQty)="increaseQty($event)" (decreaseQty)="decreaseQty($event)"
+          (remove)="remove($event)"></mt-order-itens>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -53,14 +72,14 @@
         <div class="col-sm-6 col-xs-12">
           <p class="lead">Formas de Pagamento:</p>
           <div class="form-group">
-            <mt-radio [options]="paymentOptions" required name="paymentOption" ngModel></mt-radio>
+            <mt-radio [options]="paymentOptions" formControlName="paymentOptional" ></mt-radio>
           </div>
 
         </div>
         <!-- /.col -->
         <div class="col-sm-6 col-xs-12">
           <p class="lead">Frete e Total:</p>
-            <mt-delivery-cost [delivery]="delivery" [itemsValue]="itemsValue()"></mt-delivery-cost>
+          <mt-delivery-cost [delivery]="delivery" [itemsValue]="itemsValue()"></mt-delivery-cost>
         </div>
         <!-- /.col -->
       </div>
@@ -69,11 +88,9 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button href="order-summary.html" 
-        (click) = "checkOrder(form.value)"
-        [disabled]="!form.valid || cartItems().length === 0" 
-        class="btn btn-success pull-right">
-        <i class="fa fa-credit-card"></i> Concluir
+        <button href="order-summary.html" (click)="checkOrder(orderForm.value)"
+          [disabled]="!orderForm.valid || cartItems().length === 0" class="btn btn-success pull-right">
+          <i class="fa fa-credit-card"></i> Concluir
           Pedido
         </button>
       </div>
