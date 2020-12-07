@@ -11,7 +11,7 @@ import { MEAT_API } from "app/config/api.config";
 export class OrderService{
     
 
-    constructor(private cartService: ShoppingCartService, private http: Http){
+    constructor(public cartService: ShoppingCartService, public http: Http){
 
     }
 

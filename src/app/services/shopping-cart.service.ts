@@ -8,7 +8,7 @@ export class ShoppingCartService {
 
     items: CartItem[] = [];
 
-    constructor(private notifyService: NotificationService) {
+    constructor(public notifyService: NotificationService) {
 
     }
 

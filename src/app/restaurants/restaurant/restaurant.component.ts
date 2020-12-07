@@ -1,5 +1,5 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition  } from '@angular/animations';
 import { Restaurant } from 'app/models/restaurant.model';
 
 @Component({

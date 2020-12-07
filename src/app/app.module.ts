@@ -1,12 +1,15 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './modules/shared.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
@@ -15,10 +18,6 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
-import { NotFoundComponent } from './not-found/not-found.component'
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 

@@ -1,4 +1,4 @@
-import { state, trigger, style, transition, animate } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'app/models/menu-item.model';
 

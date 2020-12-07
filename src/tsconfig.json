@@ -12,7 +12,7 @@
       "dom"
     ],
     "outDir": "../out-tsc/app",
-    "target": "es5",
+    "target": "ES5",
     "module": "es2015",
     "baseUrl": "",
     "types": [],
