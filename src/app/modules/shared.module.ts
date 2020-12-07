@@ -1,9 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InputComponent } from "./input/input.component";
-import { RadioComponent } from "./radio/radio.component";
-import { RatingComponent } from "./rating/rating.component";
+import { InputComponent } from "../shared/input/input.component";
+import { RadioComponent } from "../shared/radio/radio.component";
+import { RatingComponent } from "../shared/rating/rating.component";
 
 @NgModule({
     declarations: [InputComponent, RadioComponent, RatingComponent],
