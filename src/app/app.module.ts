@@ -16,7 +16,8 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component'
+import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
+import { NotFoundComponent } from './not-found/not-found.component'
 
 
 
@@ -37,7 +38,8 @@ import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
