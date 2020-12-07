@@ -15,6 +15,8 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component'
 
 
 
@@ -41,7 +43,8 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
