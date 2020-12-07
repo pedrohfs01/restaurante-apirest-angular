@@ -18,6 +18,7 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { NotFoundComponent } from './not-found/not-found.component'
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 
@@ -48,7 +49,7 @@ import { NotFoundComponent } from './not-found/not-found.component'
     SharedModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
