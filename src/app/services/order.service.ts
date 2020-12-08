@@ -4,14 +4,17 @@ import { Order } from "app/models/order.model";
 import { Observable } from "rxjs/Observable";
 import { ShoppingCartService } from "./shopping-cart.service";
 import "rxjs/add/operator/map"
-import { HttpClient} from "@angular/common/http";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { MEAT_API } from "app/config/api.config";
+import { LoginService } from "./login.service";
 
 @Injectable()
 export class OrderService{
     
 
-    constructor(public cartService: ShoppingCartService, public http: HttpClient){
+    constructor(public cartService: ShoppingCartService, 
+        public http: HttpClient,
+        private loginService: LoginService){
 
     }
 
@@ -40,7 +43,11 @@ export class OrderService{
     }
 
     checkOrder(order: Order) :Observable<string>{
-        return this.http.post<Order>(`${MEAT_API}/orders`, order)
+        let headers = new HttpHeaders();
+        if(this.loginService.isLoggedIn()){
+            headers = headers.set('Authorization', `Bearer ${this.loginService.user.accessToken}`)
+        }
+        return this.http.post<Order>(`${MEAT_API}/orders`, order, {headers:headers})
         .map(order => order.id);
     }
 }
