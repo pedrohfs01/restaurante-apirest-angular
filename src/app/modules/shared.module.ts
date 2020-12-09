@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LoggedInGuard } from "app/security/login/loggedin.guard";
+import { LeaveOrderGuard } from "app/security/leave-order.guard";
+import { LoggedInGuard } from "app/security/loggedin.guard";
 import { LoginService } from "app/services/login.service";
 import { NotificationService } from "app/services/notification.service";
 import { OrderService } from "app/services/order.service";
@@ -24,7 +25,7 @@ export class SharedModule{
             ngModule: SharedModule,
             providers:[ShoppingCartService, RestauranteService, 
                        OrderService, NotificationService, LoginService,
-                    LoggedInGuard]
+                    LoggedInGuard, LeaveOrderGuard]
         }
     }
 }

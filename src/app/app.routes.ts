@@ -6,7 +6,7 @@ import { MenuComponent } from "./restaurant-detail/menu/menu.component";
 import { RestaurantDetailComponent } from "./restaurant-detail/restaurant-detail.component";
 import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component";
 import { RestaurantsComponent } from "./restaurants/restaurants.component";
-import { LoggedInGuard } from "./security/login/loggedin.guard";
+import { LoggedInGuard } from "./security/loggedin.guard";
 import { LoginComponent } from "./security/login/login.component";
 
 export const ROUTES: Routes = [
