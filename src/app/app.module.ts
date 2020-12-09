@@ -1,4 +1,9 @@
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
+
+import localePt from "@angular/common/locales/pt"
+
+registerLocaleData(localePt, 'pt');
+
 import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -53,7 +58,7 @@ import { ApplicationErrorHandler } from './exceptions/error-handler';
     SharedModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
+  providers: [{provide: LOCALE_ID, useValue: 'pt'},
               {provide: ErrorHandler, useClass: ApplicationErrorHandler}],
   bootstrap: [AppComponent]
 })

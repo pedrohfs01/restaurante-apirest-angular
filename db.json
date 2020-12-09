@@ -472,6 +472,22 @@
         }
       ],
       "id": 6
+    },
+    {
+      "name": "pedro",
+      "email": "ped@e",
+      "emailConfirmation": "ped@e",
+      "address": "pedro",
+      "number": "pedro",
+      "optionalAddress": "pedr",
+      "paymentOptional": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "cup-cake"
+        }
+      ],
+      "id": 7
     }
   ]
 }

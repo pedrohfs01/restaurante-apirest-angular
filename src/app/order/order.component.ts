@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartItem } from 'app/models/cart-item.model';
 import { Order, OrderItem } from 'app/models/order.model';
@@ -32,15 +32,17 @@ export class OrderComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      email: this.formBuilder.control('', [Validators.required, Validators.email]),
-      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
-      address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      number: this.formBuilder.control('', [Validators.required]),
-      optionalAddress: this.formBuilder.control(''),
-      paymentOptional: this.formBuilder.control('', [Validators.required])
-    }, { validator: OrderComponent.equalsTo });
+      this.orderForm = new FormGroup({
+          name: new FormControl('', {
+              validators: [Validators.required, Validators.minLength(5)]
+          }),
+          email: this.formBuilder.control('', [Validators.required, Validators.email]),
+          emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
+          address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+          number: this.formBuilder.control('', [Validators.required]),
+          optionalAddress: this.formBuilder.control(''),
+          paymentOptional: this.formBuilder.control('', [Validators.required])
+      }, { validators: [OrderComponent.equalsTo], updateOn: 'blur' })
   }
 
   static equalsTo(group: AbstractControl): { [key: string]: boolean } {
