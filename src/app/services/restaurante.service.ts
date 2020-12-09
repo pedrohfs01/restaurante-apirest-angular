@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { MEAT_API } from "app/config/api.config";
-import { ErrorHandler } from "app/exceptions/error-handler";
 import { MenuItem } from "app/models/menu-item.model";
 import { Restaurant } from "app/models/restaurant.model";
 import 'rxjs/add/operator/catch';
