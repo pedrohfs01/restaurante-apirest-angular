@@ -41,7 +41,10 @@ export class OrderComponent implements OnInit {
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required]),
       optionalAddress: this.formBuilder.control(''),
-      paymentOptional: this.formBuilder.control('', [Validators.required])
+      paymentOptional: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'change'
+      })
     }, { validators: [OrderComponent.equalsTo], updateOn: 'blur' })
   }
 
