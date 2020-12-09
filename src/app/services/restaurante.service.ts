@@ -3,9 +3,8 @@ import { Injectable } from "@angular/core";
 import { MEAT_API } from "app/config/api.config";
 import { MenuItem } from "app/models/menu-item.model";
 import { Restaurant } from "app/models/restaurant.model";
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import { Observable } from "rxjs/Observable";
+
+import { Observable } from "rxjs";
 
 @Injectable()
 export class RestauranteService{

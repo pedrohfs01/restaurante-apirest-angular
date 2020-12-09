@@ -6,7 +6,7 @@ import { Order, OrderItem } from 'app/models/order.model';
 import { RadioOption } from 'app/models/radio-option.model';
 import { OrderService } from 'app/services/order.service';
 
-import "rxjs/add/operator/do"
+import { tap } from "rxjs/operators"
 
 @Component({
   selector: 'mt-order',
@@ -32,17 +32,17 @@ export class OrderComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-      this.orderForm = new FormGroup({
-          name: new FormControl('', {
-              validators: [Validators.required, Validators.minLength(5)]
-          }),
-          email: this.formBuilder.control('', [Validators.required, Validators.email]),
-          emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
-          address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-          number: this.formBuilder.control('', [Validators.required]),
-          optionalAddress: this.formBuilder.control(''),
-          paymentOptional: this.formBuilder.control('', [Validators.required])
-      }, { validators: [OrderComponent.equalsTo], updateOn: 'blur' })
+    this.orderForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(5)]
+      }),
+      email: this.formBuilder.control('', [Validators.required, Validators.email]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
+      address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      number: this.formBuilder.control('', [Validators.required]),
+      optionalAddress: this.formBuilder.control(''),
+      paymentOptional: this.formBuilder.control('', [Validators.required])
+    }, { validators: [OrderComponent.equalsTo], updateOn: 'blur' })
   }
 
   static equalsTo(group: AbstractControl): { [key: string]: boolean } {
@@ -88,9 +88,9 @@ export class OrderComponent implements OnInit {
       .map((item: CartItem) => new OrderItem(item.quantity, item.menu.id))
 
     this.orderService.checkOrder(order)
-      .do((orderId: string) => {
+      .pipe(tap((orderId: string) => {
         this.orderId = orderId;
-      })
+      }))
       .subscribe((orderId: string) => {
         this.orderService.clear();
         this.router.navigate(['/order-summary']);
