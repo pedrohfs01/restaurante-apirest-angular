@@ -4,6 +4,7 @@ import { MEAT_API } from "app/config/api.config";
 import { User } from "app/models/user.model";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do"
+import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -11,8 +12,12 @@ export class LoginService{
 
     user: User;
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private router: Router){
 
+    }
+
+    handleLogin(path?: string){
+        this.router.navigate(['/login', path])
     }
 
     isLoggedIn(): boolean {
