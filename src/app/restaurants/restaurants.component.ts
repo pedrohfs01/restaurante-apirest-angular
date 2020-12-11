@@ -56,7 +56,7 @@ export class RestaurantsComponent implements OnInit {
           catchError(error => from([])))))
       .subscribe(restaurants => this.restaurants = restaurants);
 
-    this.restaurantService.restaurants().subscribe(response => this.restaurants = response);
+    this.restaurantService.allRestaurants().subscribe(response => this.restaurants = response);
 
   }
 

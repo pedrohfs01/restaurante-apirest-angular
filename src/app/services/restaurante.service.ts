@@ -12,6 +12,10 @@ export class RestauranteService{
     constructor(public http: HttpClient){
     }
 
+    allRestaurants(): Observable<Restaurant[]>{
+        return this.http.get<Restaurant[]>(`${MEAT_API}/restaurantes`);
+    }
+
     restaurants(search?: string) : Observable<Restaurant[]>{
         let params: HttpParams = undefined;
         if(search){
@@ -21,13 +25,13 @@ export class RestauranteService{
     }
 
     restaurantById(id: string): Observable<Restaurant>{
-        return this.http.get<Restaurant>(`${MEAT_API}/restaurants/${id}`)
+        return this.http.get<Restaurant>(`${MEAT_API}/restaurantes/${id}`)
     }
 
     reviewsOfRestaurant(id: string): Observable<any>{
-        return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
+        return this.http.get(`${MEAT_API}/restaurantes/${id}/reviews`)
     }
     menuOfRestaurant(id: string): Observable<MenuItem[]>{
-        return this.http.get<MenuItem[]>(`${MEAT_API}/restaurants/${id}/menu`);
+        return this.http.get<MenuItem[]>(`${MEAT_API}/restaurantes/${id}/menu`);
     }
 }
