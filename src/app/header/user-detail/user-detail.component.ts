@@ -19,7 +19,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   isLoggedIn(): boolean{
-    return this.loginService.isLoggedIn();
+    return this.loginService.isAuthenticated();
   }
 
   login() {
@@ -27,7 +27,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   logout(){
-    return this.loginService.logout();
+    return this.loginService.encerrarSessao();
   }
 
 }

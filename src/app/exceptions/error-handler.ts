@@ -20,7 +20,7 @@ export class ApplicationErrorHandler extends ErrorHandler {
             this.zone.run(() => {
                 switch (errorResponse.status) {
                     case 401:
-                        this.injector.get(LoginService).handleLogin();
+                        this.ns.notify(message || 'Não autorizado.')
                         break;
                     case 403:
                         this.ns.notify(message || 'Não autorizado.')

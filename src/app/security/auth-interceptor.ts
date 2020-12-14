@@ -1,22 +1,29 @@
-import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable, Injector } from "@angular/core";
-import { LoginService } from "app/services/login.service";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor{
+export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(public injector: Injector){}
+    constructor() { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-        const loginService = this.injector.get(LoginService);
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const tokenString = localStorage.getItem('access_token');
 
-        if(loginService.isLoggedIn()){
-            const authRequest = req.clone(
-                {setHeaders: {'Authorization': `Bearer ${loginService.user.accessToken}`}});
-            return next.handle(authRequest)
+        const url = request.url;
 
-        }else{return next.handle(req);}
+        if (tokenString && !url.endsWith('/oauth/token')) {
+            const token = JSON.parse(tokenString);
+            const jwt = token.access_token;
+            request = request.clone({
+                setHeaders: {
+                    Authorization: 'Bearer ' + jwt
+                }
+            })
+            return next.handle(request);
+        } else {
+            next.handle(request);
+        }
 
     }
 

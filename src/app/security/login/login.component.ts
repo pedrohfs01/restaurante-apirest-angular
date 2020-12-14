@@ -27,10 +27,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(user => { 
-        this.notifyService.notify(`Bem vindo ${user.name}`) 
-      },
+    this.loginService.tentarLogar(this.loginForm.value.email, this.loginForm.value.password)
+    .subscribe(response => {
+      const access_token = JSON.stringify(response);
+      localStorage.setItem('access_token', access_token)
+      this.router.navigate(['/login'])
+    },
         error => {
           this.notifyService.notify(error.error.message);
         }, () => {

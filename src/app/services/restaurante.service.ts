@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { MEAT_API } from "app/config/api.config";
 import { MenuItem } from "app/models/menu-item.model";
 import { Restaurant } from "app/models/restaurant.model";
+import { environment } from "environments/environment";
 
 import { Observable } from "rxjs";
 
@@ -13,7 +13,7 @@ export class RestauranteService{
     }
 
     allRestaurants(): Observable<Restaurant[]>{
-        return this.http.get<Restaurant[]>(`${MEAT_API}/restaurantes`);
+        return this.http.get<Restaurant[]>(`${environment.api}/restaurantes`);
     }
 
     restaurants(search?: string) : Observable<Restaurant[]>{
@@ -21,17 +21,17 @@ export class RestauranteService{
         if(search){
             params = new HttpParams().set('q', search)
         }
-        return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {params: params})
+        return this.http.get<Restaurant[]>(`${environment.api}/restaurants`, {params: params})
     }
 
     restaurantById(id: string): Observable<Restaurant>{
-        return this.http.get<Restaurant>(`${MEAT_API}/restaurantes/${id}`)
+        return this.http.get<Restaurant>(`${environment.api}/restaurantes/${id}`)
     }
 
     reviewsOfRestaurant(id: string): Observable<any>{
-        return this.http.get(`${MEAT_API}/restaurantes/${id}/reviews`)
+        return this.http.get(`${environment.api}/restaurantes/${id}/reviews`)
     }
     menuOfRestaurant(id: string): Observable<MenuItem[]>{
-        return this.http.get<MenuItem[]>(`${MEAT_API}/restaurantes/${id}/menu`);
+        return this.http.get<MenuItem[]>(`${environment.api}/restaurantes/${id}/menu`);
     }
 }
