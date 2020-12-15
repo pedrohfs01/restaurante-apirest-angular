@@ -6,6 +6,7 @@ import { User } from "app/models/user.model";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+import { NotificationService } from "./notification.service";
 
 
 
@@ -23,7 +24,8 @@ export class LoginService {
     lastUrl: string
     user: User;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, 
+                private router: Router) {
         this.router.events.pipe(filter(e => e instanceof NavigationEnd))
             .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
     }
@@ -43,6 +45,7 @@ export class LoginService {
 
     encerrarSessao() {
         localStorage.removeItem('access_token')
+        this.handleLogin();
     }
 
     getUsuarioAutenticado() {

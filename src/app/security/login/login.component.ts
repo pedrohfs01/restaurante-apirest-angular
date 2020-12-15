@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'app/models/user.model';
 import { LoginService } from 'app/services/login.service';
 import { NotificationService } from 'app/services/notification.service';
 
@@ -34,9 +35,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/login'])
     },
         error => {
-          this.notifyService.notify(error.error.message);
+          this.notifyService.notify("Login ou senha incorretos.");
         }, () => {
           this.router.navigate([atob(this.navigateTo)]);
+          this.notifyService.notify('BEM VINDO!')
         });
   }
 }
