@@ -19,7 +19,6 @@ export class LoggedInGuard implements CanActivate{
         const authenticated =  this.authService.isAuthenticated();
     
         if(authenticated){
-          this.notifyService.notify("Entre na sua conta para efetuar a compra");
           return true;
         }else{
           this.router.navigate(['/login'])
