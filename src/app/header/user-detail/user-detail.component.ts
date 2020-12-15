@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/models/user.model';
 import { LoginService } from 'app/services/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'mt-user-detail',
@@ -9,13 +10,14 @@ import { LoginService } from 'app/services/login.service';
 })
 export class UserDetailComponent implements OnInit {
 
+  usuario: User;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-  }
-
-  user(): User{
-    return this.loginService.user;
+    this.loginService.getUsuarioAutenticado().subscribe(
+      response => this.usuario = response
+    );
   }
 
   isLoggedIn(): boolean{

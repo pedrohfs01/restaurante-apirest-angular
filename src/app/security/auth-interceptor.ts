@@ -20,11 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
                     Authorization: 'Bearer ' + jwt
                 }
             })
-            return next.handle(request);
-        } else {
-            next.handle(request);
         }
-
+        return next.handle(request);
     }
 
 

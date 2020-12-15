@@ -12,7 +12,7 @@ import { filter } from "rxjs/operators";
 @Injectable()
 export class LoginService {
 
-    apiURL: string = environment.api + "/api/usuarios"
+    apiURL: string = environment.api + "/users/"
     tokenURL: string = environment.api + environment.obterTokenUrl
     clientID: string = environment.clientId;
     clientSecret: string = environment.clientSecret;
@@ -20,12 +20,16 @@ export class LoginService {
 
     jwtHelper: JwtHelperService = new JwtHelperService();
 
-    user: User;
     lastUrl: string
+    user: User;
 
     constructor(private http: HttpClient, private router: Router) {
         this.router.events.pipe(filter(e => e instanceof NavigationEnd))
             .subscribe((e: NavigationEnd) => this.lastUrl = e.url);
+    }
+
+    getUsuarioByEmail(email: string): Observable<User>{
+        return this.http.get<User>(`${this.apiURL}email/${email}`);
     }
 
     obterToken() {
@@ -45,7 +49,7 @@ export class LoginService {
         const token = this.obterToken();
         if (token) {
             const usuario = this.jwtHelper.decodeToken(token).user_name
-            return usuario;
+            return this.getUsuarioByEmail(usuario);
         }
         return null;
     }
