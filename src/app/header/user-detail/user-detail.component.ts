@@ -15,7 +15,11 @@ export class UserDetailComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-    this.loginService.getUsuarioAutenticado().subscribe(
+    this.user();
+  }
+
+  user(){
+    return this.loginService.getUsuarioAutenticado().subscribe(
       response => this.usuario = response
     );
   }

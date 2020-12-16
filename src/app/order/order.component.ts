@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CartItem } from 'app/models/cart-item.model';
 import { Order, OrderItem } from 'app/models/order.model';
 import { RadioOption } from 'app/models/radio-option.model';
+import { NotificationService } from 'app/services/notification.service';
 import { OrderService } from 'app/services/order.service';
 
 import { tap } from "rxjs/operators"
@@ -29,7 +30,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private router: Router,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private notifyService: NotificationService) { }
 
   ngOnInit() {
     this.orderForm = new FormGroup({
@@ -97,6 +99,8 @@ export class OrderComponent implements OnInit {
       .subscribe((orderId: string) => {
         this.orderService.clear();
         this.router.navigate(['/order-summary']);
+      }, error => {
+        this.notifyService.notify("Ocorreu um erro. Verifique os dados e tente novamente.")
       });
   }
 }
